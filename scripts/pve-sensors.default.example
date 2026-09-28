@@ -1,7 +1,7 @@
 # /etc/default/pve-sensors
 # Home Assistant (IoT VLAN). Comma-separate to add more, CIDRs allowed.
-PVE_SENSORS_ALLOWED=10.0.2.254/32
+PVE_SENSORS_ALLOWED=HOME_ASSISTANT_IP/32
 # Listen only on the Proxmox host's LAN address, not every interface.
-PVE_SENSORS_BIND=10.0.4.150
+PVE_SENSORS_BIND=PROXMOX_HOST_IP
 PVE_SENSORS_PORT=9000
 PVE_SENSORS_CACHE_TTL=60
