@@ -1,15 +1,20 @@
 [Unit]
-Description=PVE Sensors API (User Mode)
-After=network.target
+Description=PVE Sensors API (hardened launcher)
+After=network-online.target
+Wants=network-online.target
 
 [Service]
-ExecStart=/usr/bin/python3 %h/.local/bin/pve-sensors-api.py
+EnvironmentFile=/etc/default/pve-sensors
+ExecStart=/usr/bin/python3 /usr/local/bin/pve-sensors-secure.py
 Restart=always
 RestartSec=10s
 
+# Runs as root: dmidecode/smartctl need it. Conservative hardening; the
+# script is read-only, so it needs no write access to the system.
 NoNewPrivileges=yes
 PrivateTmp=yes
 ProtectSystem=full
+ProtectHome=yes
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
